@@ -362,6 +362,9 @@
       <initrd>casper/initrd.img</initrd>
     </media>
 
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/6.10">
@@ -443,6 +446,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/7.04">
@@ -506,6 +513,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/7.10">
@@ -569,6 +580,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/8.04">
@@ -645,6 +660,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/8.10">
@@ -699,6 +718,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/9.04">
@@ -757,6 +780,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/9.10">
@@ -811,6 +838,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/10.04">
@@ -858,6 +889,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/10.10">
@@ -925,6 +960,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/11.04">
@@ -992,6 +1031,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/11.10">
@@ -1055,6 +1098,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/12.04">
@@ -1116,6 +1163,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/12.10">
@@ -1177,6 +1228,10 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 
   <os id="http://ubuntu.com/ubuntu/13.04">
@@ -1299,5 +1354,9 @@
       <kernel>casper/vmlinuz</kernel>
       <initrd>casper/initrd.img</initrd>
     </media>
+
+    <installer>
+      <script id='http://fedoraproject.org/scripts/ubuntu/jeos'/>
+    </installer>
   </os>
 </libosinfo>
