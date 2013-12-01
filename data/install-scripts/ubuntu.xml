@@ -1,0 +1,135 @@
+<libosinfo version="0.0.1">
+  <!-- JEOS PROFILE -->
+  <install-script id='http://fedoraproject.org/scripts/ubuntu/jeos'>
+    <profile>jeos</profile>
+    <expected-filename>preseed.cfg</expected-filename>
+    <config>
+      <param name="admin-password" policy="optional"/>
+      <param name="l10n-keyboard" policy="optional" value-map="http://libosinfo.fedorahosted.org/x11-keyboard"/>
+      <param name="l10n-timezone" policy="optional"/>
+      <param name="l10n-language" policy="optional"/>
+      <param name="target-disk" policy="optional"/>
+      <param name="hostname" policy="optional"/>
+    </config>
+    <template>
+      <xsl:stylesheet
+        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        version="1.0">
+        <xsl:output method="text"/>
+        <xsl:template name="target-disk">
+          <xsl:choose>
+            <xsl:when test="config/target-disk != ''">
+              <xsl:value-of select="config/target-disk"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <!-- IDE -->
+              <xsl:text>/dev/hda</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:template>
+
+        <xsl:template name="hostname">
+          <xsl:choose>
+            <xsl:when test="config/hostname != ''">
+              <xsl:value-of select="config/hostname"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>localhost</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:template>
+        <xsl:template match="/install-script-config">
+          <xsl:text>d-i debian-installer/locale string </xsl:text><xsl:value-of select="config/l10n-language"/><xsl:text>&#xA;</xsl:text>
+          <xsl:text>d-i console-setup/ask_detect boolean false&#xA;</xsl:text>
+          <xsl:text>d-i console-setup/layoutcode string</xsl:text> <xsl:value-of select="config/l10n-keyboard"/><xsl:text>&#xA;</xsl:text>
+          <xsl:text>d-i netcfg/choose_interface select auto&#xA;</xsl:text>
+          <xsl:text>d-i netcfg/get_hostname string </xsl:text><xsl:call-template name="hostname"/><xsl:text>&#xA;</xsl:text>
+          <xsl:text>d-i netcfg/get_domain string unassigned-domain&#xA;</xsl:text>
+          <xsl:text>d-i netcfg/wireless_wep string&#xA;</xsl:text>
+          <xsl:text>d-i clock-setup/utc boolean true&#xA;</xsl:text>
+          <xsl:text>d-i time/zone string </xsl:text><xsl:value-of select="config/l10n-timezone"/><xsl:text>&#xA;</xsl:text>
+          <xsl:if test="os/version &lt; 7.04">
+            <xsl:text>d-i partman-auto/disk string </xsl:text><xsl:call-template name="target-disk"/><xsl:text>&#xA;</xsl:text>
+          </xsl:if>
+          <xsl:if test="os/version = 7.04">
+            <xsl:text>d-i partman-auto/init_automatically_partition select Use the largest continuous free space&#xA;</xsl:text>
+          </xsl:if>
+          <xsl:text>d-i partman-auto/method string regular&#xA;</xsl:text>
+          <xsl:choose>
+            <xsl:when test="os/version &lt; 7.10">
+              <xsl:text>d-i partman-auto/choose_recipe select Separate /home partition&#xA;</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>d-i partman-auto/choose_recipe select home&#xA;</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:text>d-i partman/confirm_write_new_label boolean true&#xA;</xsl:text>
+          <xsl:choose>
+            <xsl:when test="os/version &lt; 7.10">
+              <xsl:text>d-i partman/choose_partition select Finish partitioning and write changes to disk&#xA;</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>d-i partman/choose_partition select finish&#xA;</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:text>d-i partman/confirm boolean true&#xA;</xsl:text>
+          <xsl:if test="os/version &gt; 9.10">
+            <xsl:text>d-i partman/confirm_nooverwrite boolean true&#xA;</xsl:text>
+          </xsl:if>
+          <xsl:text>d-i passwd/root-login boolean true&#xA;</xsl:text>
+          <xsl:text>d-i passwd/make-user boolean false&#xA;</xsl:text>
+          <xsl:text>d-i passwd/root-password password </xsl:text><xsl:value-of select="config/admin-password"/><xsl:text>&#xA;</xsl:text>
+          <xsl:text>d-i passwd/root-password-again password </xsl:text><xsl:value-of select="config/admin-password"/><xsl:text>&#xA;</xsl:text>
+
+          <xsl:if test="os/version &lt; 6.10">
+            <xsl:text>d-i pkgsel/install-language-support boolean false&#xA;</xsl:text>
+          </xsl:if>
+
+          <xsl:choose>
+            <xsl:when test="os/version &lt; 7.10">
+              <xsl:text>tasksel tasksel/first multiselect ubuntu-standard, ubuntu-desktop&#xA;</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>tasksel tasksel/first multiselect standard&#xA;</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="os/version &lt; 8.04">
+              <xsl:text>d-i mirror/http/proxy string&#xA;</xsl:text>
+            </xsl:when>
+            <xsl:when test="os/version = 10.04">
+              <xsl:text>d-i pkgsel/include/install-recommends boolean true&#xA;</xsl:text>
+              <xsl:text>d-i pkgsel/include string ltsp-server-standalone openssh-server python-software-properties&#xA;</xsl:text>
+              <xsl:text>d-i preseed/late_command string chroot /target /usr/sbin/ltsp-update-sshkeys&#xA;</xsl:text>
+            </xsl:when>
+            <xsl:when test="os/version = 11.04">
+              <xsl:text>d-i pkgsel/include/install-recommends boolean true&#xA;</xsl:text>
+              <xsl:text>d-i pkgsel/include string openssh-server&#xA;</xsl:text>
+            </xsl:when>
+            <xsl:when test="os/version &gt; 11.04">
+              <xsl:text>d-i pkgsel/include/install-recommends boolean true&#xA;</xsl:text>
+              <xsl:text>d-i pkgsel/include string openssh-server python-software-properties&#xA;</xsl:text>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:text>d-i grub-installer/only_debian boolean true&#xA;</xsl:text>
+          <xsl:text>d-i grub-installer/with_other_os boolean true&#xA;</xsl:text>
+          <xsl:text>d-i apt-setup/security_host string&#xA;</xsl:text>
+          <xsl:text>base-config apt-setup/security-updates boolean false&#xA;</xsl:text>
+
+          <xsl:if test="os/version &gt; 7.04">
+            <xsl:text>ubiquity ubiquity/summary note&#xA;</xsl:text>
+            <xsl:text>ubiquity ubiquity/reboot boolean true&#xA;</xsl:text>
+          </xsl:if>
+          <xsl:text>d-i finish-install/reboot_in_progress note&#xA;</xsl:text>
+          <xsl:if test="os/version &lt; 6.10">
+            <xsl:text>d-i prebaseconfig/reboot_in_progress note&#xA;</xsl:text>
+          </xsl:if>
+
+          <xsl:if test="os/version = 13.04">
+            <xsl:text>ubiquity ubiquity/success_command string sed -i 's/eject -p -m.*/&amp; [ "$prompt" ] || return 0/' /etc/init.d/casper&#xA;</xsl:text>
+          </xsl:if>
+        </xsl:template>
+      </xsl:stylesheet>
+    </template>
+  </install-script>
+</libosinfo>
