@@ -136,6 +136,10 @@
         <storage>5368709120</storage>
       </recommended>
     </resources>
+
+    <installer>
+      <script id='http://debian.org/scripts/debian/jeos'/>
+    </installer>
   </os>
 
   <os id="http://debian.org/debian/6">
@@ -202,6 +206,10 @@
       <kernel>install/vmlinuz</kernel>
       <initrd>install/initrd.gz</initrd>
     </media>
+
+    <installer>
+      <script id='http://debian.org/scripts/debian/jeos'/>
+    </installer>
   </os>
 
   <os id="http://debian.org/debian/7">
@@ -248,6 +256,10 @@
       <kernel>install.amd/vmlinuz</kernel>
       <initrd>install.amd/initrd.gz</initrd>
     </media>
+
+    <installer>
+      <script id='http://debian.org/scripts/debian/jeos'/>
+    </installer>
   </os>
 
 </libosinfo>
