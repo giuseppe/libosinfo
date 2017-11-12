@@ -1,0 +1,9 @@
+<libosinfo version="0.0.1">
+  <os id="https://gentoo.org/">
+    <short-id>Gentoo</short-id>
+    <_name>Gentoo</_name>
+    <_vendor>Gentoo Project</_vendor>
+    <family>linux</family>
+    <distro>linux</distro>
+  </os>
+</libosinfo>
