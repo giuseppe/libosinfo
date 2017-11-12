@@ -22,6 +22,8 @@ database_in_files = 	\
 	suse.xml.in     \
 	ubuntu.xml.in   \
 	windows.xml.in  \
+	gentoo.xml.in  \
+	funtoo.xml.in  \
 	$(NULL)
 
 database_DATA = $(database_in_files:.xml.in=.xml)
