@@ -1,0 +1,9 @@
+<libosinfo version="0.0.1">
+  <os id="https://funtoo.org/">
+    <short-id>Funtoo</short-id>
+    <_name>Funtoo</_name>
+    <_vendor>Funtoo Project</_vendor>
+    <family>linux</family>
+    <distro>linux</distro>
+  </os>
+</libosinfo>
